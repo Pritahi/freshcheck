@@ -29,7 +29,10 @@ LLM answers go stale silently: prices change, versions move on, laws enter into 
 ## Tech stack
 Next.js 14, TypeScript, Bifrost (Maxim AI) LLM gateway, Tavily Search API, Groq + Gemini free tiers, Docker (gateway), MIT license.
 
+**Live demo:** https://freshcheck-rust.vercel.app (deployed in demo mode - judges can click through the full pipeline with zero API keys)
+
 ## Links
+- Live demo: https://freshcheck-rust.vercel.app
 - Repo: https://github.com/Pritahi/freshcheck
 - Pitch deck: docs/freshcheck-deck.pptx (in repo)
-- Video script: docs/VIDEO-SCRIPT.md (optional video)
+- Video script: docs/VIDEO-SCRIPT.md (video is optional per the hackathon FAQ)

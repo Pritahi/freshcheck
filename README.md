@@ -2,6 +2,8 @@
 
 > Geek Room Global AI Hackathon 2026 · Problem statement: **"Build a Stale-Answer Detector for AI Applications"** · Built with **Bifrost (Maxim AI)** and **Tavily**.
 
+**Live demo (zero keys, demo mode): https://freshcheck-rust.vercel.app**
+
 LLM answers go stale silently: last year's price, a deprecated API version, a repealed regulation, a departed CEO — all stated with full confidence. **FreshCheck** breaks an AI-generated answer into atomic claims, finds the ones that can go stale, re-verifies them against the live web, and gives every claim (and the whole answer) a **freshness score** with citations.
 
 ## What it does
