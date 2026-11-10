@@ -1,0 +1,28 @@
+{
+  "$schema": "https://www.getbifrost.ai/schema",
+  "providers": {
+    "groq": {
+      "keys": [{ "value": "${GROQ_API_KEY}", "weight": 1 }]
+    },
+    "gemini": {
+      "keys": [{ "value": "${GEMINI_API_KEY}", "weight": 1 }]
+    }
+  },
+  "fallbacks": [
+    {
+      "provider": "groq",
+      "model": "llama-3.3-70b-versatile",
+      "fallbacks": ["gemini/gemini-2.0-flash"]
+    }
+  ],
+  "governance": {
+    "budgets": [
+      {
+        "id": "freshcheck-free-tier",
+        "max_limit": 0,
+        "reset_duration": "1M"
+      }
+    ]
+  },
+  "logs": { "level": "info" }
+}
