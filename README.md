@@ -2,7 +2,7 @@
 
 > Geek Room Global AI Hackathon 2026 · Problem statement: **"Build a Stale-Answer Detector for AI Applications"** · Built with **Bifrost (Maxim AI)** and **Tavily**.
 
-**Live demo (zero keys, demo mode): https://freshcheck-rust.vercel.app**
+**Live demo: https://freshcheck-rust.vercel.app** — paste any LLM answer and it is re-verified live (Tavily + LLM) against current web sources. Press "Run canned demo" (empty input) for the zero-key showcase report.
 
 LLM answers go stale silently: last year's price, a deprecated API version, a repealed regulation, a departed CEO — all stated with full confidence. **FreshCheck** breaks an AI-generated answer into atomic claims, finds the ones that can go stale, re-verifies them against the live web, and gives every claim (and the whole answer) a **freshness score** with citations.
 
@@ -73,6 +73,8 @@ A CLI version of the same demo: `npm run demo`.
    ```
    Free tiers of Groq and Google Gemini are enough — no paid API anywhere.
 3. Set `DEMO_MODE=false`, `BIFROST_URL`, and `BIFROST_MODEL` (see `.env.example`), then `npm run dev`.
+
+**Serverless deployments (e.g. Vercel):** Bifrost is a self-hosted gateway and cannot run on serverless functions, so the hosted demo points the same OpenAI-compatible client at Groq's hosted endpoint instead — set `BIFROST_URL=https://api.groq.com/openai/v1`, `BIFROST_MODEL=openai/gpt-oss-120b`, `BIFROST_API_KEY=<groq key>`, plus `TAVILY_API_KEY` and `DEMO_MODE=false`. Locally, Bifrost remains the gateway with provider fallback and governance logs as described above.
 
 ## API
 
