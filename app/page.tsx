@@ -76,12 +76,16 @@ export default function Home() {
 
       <div className="card">
         <textarea
-          placeholder="Paste an LLM answer here... (demo mode ignores this and runs a canned stale answer)"
+          placeholder="Paste any LLM answer here to verify it live against current web sources - or leave empty to run the canned demo answer"
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
         />
         <button className="run" onClick={run} disabled={loading}>
-          {loading ? "Checking freshness..." : "Check freshness"}
+          {loading
+            ? "Checking freshness..."
+            : answer.trim()
+              ? "Check freshness (live)"
+              : "Run canned demo"}
         </button>
         {error && <div className="error">{error}</div>}
       </div>

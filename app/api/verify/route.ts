@@ -10,12 +10,12 @@ export async function POST(req: NextRequest) {
     const body = await req.json().catch(() => ({}));
     const answer: string = (body.answer ?? "").toString().slice(0, 8000);
 
-    if (demoMode) {
+    if (demoMode || !answer.trim()) {
       // Demo mode always renders the canned report so the UI works with zero keys.
+      // In live mode an empty input still runs the canned demo, so judges can
+      // click once for the showcase report or paste their own answer for a
+      // live Tavily + LLM verification.
       return NextResponse.json(demoReport());
-    }
-    if (!answer.trim()) {
-      return NextResponse.json({ error: "answer is required" }, { status: 400 });
     }
     const report = await verifyAnswer(answer);
     return NextResponse.json(report);

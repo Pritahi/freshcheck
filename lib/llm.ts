@@ -7,6 +7,10 @@
 
 const BIFROST_URL = process.env.BIFROST_URL ?? "http://localhost:8080/v1";
 const BIFROST_MODEL = process.env.BIFROST_MODEL ?? "groq/llama-3.3-70b-versatile";
+// Optional bearer token. Unset for a local self-hosted Bifrost gateway; set when
+// BIFROST_URL points at a hosted OpenAI-compatible endpoint (e.g. Groq) so the
+// same client code works on serverless deployments where Bifrost cannot run.
+const BIFROST_API_KEY = process.env.BIFROST_API_KEY ?? "";
 
 export interface ChatMessage {
   role: "system" | "user";
@@ -16,7 +20,10 @@ export interface ChatMessage {
 export async function llmJson<T>(messages: ChatMessage[], maxTokens = 2000): Promise<T> {
   const res = await fetch(`${BIFROST_URL}/chat/completions`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...(BIFROST_API_KEY ? { Authorization: `Bearer ${BIFROST_API_KEY}` } : {}),
+    },
     body: JSON.stringify({
       model: BIFROST_MODEL,
       messages,
