@@ -110,7 +110,11 @@ export default function Home() {
               </div>
               <div className="stat">
                 <b>{report.checkedClaims}</b>
-                <span className="score-label">re-verified live</span>
+                <span className="score-label">
+                  {report.mode === "demo"
+                    ? "example verdicts (not checked live)"
+                    : "re-verified live"}
+                </span>
               </div>
               <div className="stat">
                 <b style={{ color: "var(--red)" }}>{report.staleClaims}</b>
@@ -157,9 +161,19 @@ export default function Home() {
           ))}
 
           <div className="footer">
-            LLM calls route through a self-hosted <code>Bifrost</code> gateway (provider fallback +
-            governance) · live evidence from <code>Tavily</code> · report generated{" "}
-            {new Date(report.generatedAt).toLocaleString()}
+            {report.mode === "demo" ? (
+              <>
+                Illustrative saved report; no model or web calls · demo report rendered{" "}
+                {new Date(report.generatedAt).toLocaleString()}
+              </>
+            ) : (
+              <>
+                LLM calls route through the configured OpenAI-compatible endpoint (self-hosted{" "}
+                <code>Bifrost</code> gateway locally; hosted Groq endpoint on the Vercel{" "}
+                deployment) · live evidence from <code>Tavily</code> · report generated{" "}
+                {new Date(report.generatedAt).toLocaleString()}
+              </>
+            )}
           </div>
         </>
       )}
